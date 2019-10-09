@@ -36,7 +36,7 @@ def str2ner_train_data(s, save_path):
         if i not in begin:
             # 将所有 O 汉字放入 ner_data
             # 我/来/到/的
-            ner_data.append([s[i], 0])
+            ner_data.append([s[i], 'O'])  # other
             i = i + 1
         else:
             # 选择标记对象
@@ -68,6 +68,9 @@ def str2ner_train_data(s, save_path):
     f = open(save_path, 'w', encoding='utf-8')
     # print(ner_data)
     for each in ner_data:
+        if each == ['\n', 'O']:
+            each = ['', '']
+        print(each)
         # 格式：
         # 我 O
         # 来 0
@@ -79,7 +82,7 @@ def str2ner_train_data(s, save_path):
         # 年 E-YEAR
         # 的 O
         # ...
-        f.write(each[0] + ' ' + str(each[1]))
+        f.write(each[0] + ' ' + each[1])
         f.write('\n')
     f.close()
 
@@ -95,7 +98,7 @@ def txt2ner_train_data(file_path, save_path):
     lines = fr.readlines()
     s = ''
     for line in lines:
-        line = line.replace('\n', '')
+        # line = line.replace('\n', '')
         line = line.replace(' ', '')
         s = s + line
     fr.close()
