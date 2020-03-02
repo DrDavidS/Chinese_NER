@@ -1,2 +1,5 @@
 
 *.csv
+情感识别/input/bert-chinese/config.json
+情感识别/input/bert-chinese/pytorch_model.bin
+情感识别/input/bert-chinese/vocab.txt
